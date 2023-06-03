@@ -12,8 +12,8 @@ resource "aws_security_group" "main" {
 
   ingress {
     description = "DOCDB"
-    from_port   = 27017
-    to_port     = 27017
+    from_port   = var.port_number
+    to_port     = var.port_number
     protocol    = "tcp"
     cidr_blocks = var.allow_db_cidr
   }
@@ -31,8 +31,8 @@ resource "aws_security_group" "main" {
 
 resource "aws_docdb_cluster_parameter_group" "main" {
   family      = "docdb4.0"
-  name        = "${var.name}-${var.env}"
-  description = "${var.name}-${var.env}"
+  name        = "${var.name}-${var.env}-pg"
+  description = "${var.name}-${var.env}-pg"
   tags        = merge(var.tags, { Name = "${var.name}-${var.env}-pg" })
 }
 
